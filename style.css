@@ -1,0 +1,29 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0a1220; color: #eaf0f8; line-height: 1.7; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(ellipse at top right, #163b42, transparent 60%); }
+a { color: #79edcc; text-underline-offset: .22em; }
+a:hover { color: #fff; }
+a:focus-visible { outline: 2px solid #79edcc; outline-offset: 5px; }
+header, main, footer { max-width: 1040px; margin: auto; padding: 24px; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-bottom: 1px solid #294251; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; text-decoration: none; color: #eaf0f8; }
+.brand img { border-radius: 12px; }
+nav { display: flex; gap: 24px; flex-wrap: wrap; }
+nav a[aria-current="page"] { color: #fff; }
+main { padding-top: 64px; padding-bottom: 64px; min-height: 70vh; }
+.eyebrow { color: #79edcc; text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; font-weight: 700; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.025em; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); max-width: 850px; margin: 16px 0 24px; }
+h2 { margin-top: 40px; font-size: 1.6rem; }
+h3 { font-size: 1.15rem; }
+p, li { max-width: 76ch; }
+.lead { font-size: 1.2rem; color: #bed0df; max-width: 650px; }
+.steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+.steps li, .notice { background: #102333; border: 1px solid #294251; border-radius: 16px; padding: 24px; }
+.steps span { color: #79edcc; font-size: .85rem; font-weight: 700; }
+.steps p { margin-bottom: 0; color: #bed0df; }
+.notice { margin-top: 32px; }
+.date, footer { color: #a5bacb; font-size: .9rem; }
+footer { border-top: 1px solid #294251; }
+code { color: #c1f7e7; overflow-wrap: anywhere; }
+@media (max-width: 600px) { .steps { grid-template-columns: 1fr; } main { padding-top: 36px; } header, main, footer { padding-left: 20px; padding-right: 20px; } }

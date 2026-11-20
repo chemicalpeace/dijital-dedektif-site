@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Dijital Dedektif Studio handles creator data, TikTok authorization, and deletion requests.">
+  <title>Privacy Policy · Dijital Dedektif Studio</title>
+  <link rel="icon" type="image/png" href="icon-1024.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html"><img src="icon-1024.png" width="44" height="44" alt="">Dijital Dedektif Studio</a>
+    <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="privacy.html" aria-current="page">Privacy</a><a href="terms.html">Terms</a></nav>
+  </header>
+  <main>
+    <p class="eyebrow">Your data / The evidence trail</p>
+    <h1>Privacy Policy</h1>
+    <p class="date">Effective date: November 20, 2026 (2026-11-20)</p>
+    <p>Dijital Dedektif Studio is a single-creator tool for making educational code-forensics videos and posting to the creator’s own account. This policy covers the tool and this static listing site. Contact the operator at <a href="mailto:chemicalpeaces@gmail.com">chemicalpeaces@gmail.com</a>.</p>
+    <h2>TikTok data and permissions</h2>
+    <p>Login Kit authorization requests <code>video.publish</code> (Direct Post video publishing) and <code>user.info.basic</code> (basic profile access). The current publisher queries TikTok’s creator-info endpoint for account information, including the creator username and available privacy options. It does not separately query the user-profile endpoint or request followers, messages, contacts, or viewing history.</p>
+    <p>The local OAuth helper receives an authorization code at <code>http://127.0.0.1:8080/callback</code> and exchanges it for tokens. The publisher uses access and refresh tokens, receives upload instructions and a publish ID, and checks processing status and any returned post IDs. Video files, titles, hashtags, and posting settings are sent to TikTok to publish the creator’s content.</p>
+    <h2>Why data is used</h2>
+    <p>Authorization data enables authenticated API calls. Creator information determines permitted posting privacy and forms publication links. Publish IDs, status results, and publication links support retries, reporting, and avoiding duplicate completed publications. Script history helps avoid repeated topics.</p>
+    <h2>Storage and retention</h2>
+    <ul>
+      <li>Credentials are supplied through environment variables, a local <code>.env</code> file, or GitHub Actions secrets. The authorization helper prints the refresh token for the creator to store securely; it does not save it automatically.</li>
+      <li>Rotated TikTok refresh tokens are written to <code>TIKTOK_TOKEN_FILE</code>, default <code>.secrets/tiktok-token.json</code>, with owner-only file permissions (0600). The scheduled workflow can update the GitHub Actions refresh-token secret. Access tokens and creator-info responses are held in process memory; signed upload URLs are not written to state or receipts.</li>
+      <li>The default SQLite database, <code>state/autopilot.db</code>, retains scripts, job checkpoints, events, errors, timestamps, and publication links. Token-free receipts retain publish IDs. Generated media and reports are stored in local artifact and report directories.</li>
+      <li>The scheduled workflow persists the database and token-free receipts in the <code>autopilot-state</code> branch, caches media for resuming work, and uploads rendered MP4 artifacts with a seven-day retention setting. GitHub controls cache eviction. Reports also go to Actions summaries, a repository issue, and an optional configured webhook.</li>
+      <li>There is no automatic expiry for local tokens, local media, database history, receipts, or reports. They remain until the creator deletes them, replaces credentials, or the hosting provider removes them under its policies. Repository history and backups may retain copies after ordinary file deletion; these must be addressed separately when removing data.</li>
+    </ul>
+    <p>Keep credentials out of source control. State, artifacts, and reports can expose content or account links if the creator makes their repository or outputs public.</p>
+    <h2>No sale; limited service-provider disclosure</h2>
+    <p>We do not sell personal data or share it for advertising. Data is disclosed only as needed for the configured services below, at the creator’s direction, or where legally required. TikTok tokens and creator-info responses are not used as inputs to the script, speech, or image-generation services.</p>
+    <ul>
+      <li><strong>TikTok:</strong> authorization, creator information, video upload, posting metadata, and processing status.</li>
+      <li><strong>Google Gemini:</strong> script-generation prompts, channel configuration, and previous script titles.</li>
+      <li><strong>Microsoft Edge-TTS:</strong> narration text and voice selection for speech synthesis.</li>
+      <li><strong>Pollinations and optional Pexels:</strong> image prompts or search queries for visuals; locally generated cards are the final fallback.</li>
+      <li><strong>Optional YouTube / Google APIs:</strong> separate creator authorization and video upload with titles, descriptions, tags, and privacy settings when YouTube publishing is configured.</li>
+      <li><strong>Optional rendering worker:</strong> media and rendering inputs are sent to the creator-configured worker instead of rendering locally.</li>
+      <li><strong>GitHub and optional report webhook:</strong> scheduled execution, secrets, state, media cache, artifacts, and operational reports as described above.</li>
+    </ul>
+    <p>Each provider processes the data it receives under its own terms and privacy policies. This static site has no application analytics, tracking scripts, cookies, or external embedded assets. Its hosting provider may process ordinary request information such as IP addresses and access logs.</p>
+    <h2>Revoking access and deleting data</h2>
+    <p>Remove this app’s access in TikTok settings under the connected-app permissions (typically Settings and privacy → Security &amp; permissions → Apps and services permissions; labels may vary). Stop scheduled runs, delete the local TikTok token file and any copies, and remove <code>TIKTOK_REFRESH_TOKEN</code> from local environment or <code>.env</code> files and GitHub Actions secrets. Revocation does not automatically erase local records or already posted videos; manage published posts in TikTok.</p>
+    <p>For deletion requests, email <a href="mailto:chemicalpeaces@gmail.com">chemicalpeaces@gmail.com</a> with the account or records concerned, but never include passwords or tokens. We may request enough information to verify ownership and will delete data under our control, subject to legal obligations. Creator-controlled local files, repository history, caches, artifacts, reports, backups, and provider-held copies may require separate removal by the creator or relevant provider.</p>
+    <h2>Children</h2>
+    <p>This tool is not intended for children under 13 or anyone below the applicable minimum age for TikTok or developer services. We do not knowingly collect children’s data. Contact us if you believe a child’s data has been provided.</p>
+    <h2>Changes and contact</h2>
+    <p>Updates will be posted on this page with a revised effective date. Questions about this policy or data handling: <a href="mailto:chemicalpeaces@gmail.com">chemicalpeaces@gmail.com</a>.</p>
+  </main>
+  <footer>Dijital Dedektif Studio · <a href="terms.html">Terms of Service</a> · <a href="index.html">Home</a></footer>
+</body>
+</html>
